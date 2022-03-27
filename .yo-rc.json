@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "co.edu.poligran"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "pruueba",
+    "packageName": "co.edu.poligran",
+    "packageFolder": "co/edu/poligran",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YTg0NjVmNGIzOTVkYzA4NDBhZmZlNzA0OWEwNjEwNzUxMTQyMGIzODZkMjNmNWNiMTVmNWNjZTI2YjUzNmIwNDZiNDk3ZmVjNjQ3YTQ2Njg5ODRmMzRmYjRiNzIxYWEyNTg1ZTE3M2ZjZjRjNjUyZTYzNWM4MWI0YjMyOGM3YWM=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "darkly",
+    "clientThemeVariant": "dark",
+    "creationTimestamp": 1648422744284,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
