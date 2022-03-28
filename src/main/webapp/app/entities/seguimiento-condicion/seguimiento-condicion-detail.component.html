@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="seguimientoCondicion">
+            <h2><span>Seguimiento Condicion</span> {{ seguimientoCondicion.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Estado Condicion</span></dt>
+                <dd>
+                    <span>{{ seguimientoCondicion.estadoCondicion }}</span>
+                </dd>
+                <dt><span>Fecha</span></dt>
+                <dd>
+                    <span>{{ seguimientoCondicion.fecha }}</span>
+                </dd>
+                <dt><span>Diagnostico</span></dt>
+                <dd>
+                    <span>{{ seguimientoCondicion.diagnostico }}</span>
+                </dd>
+                <dt><span>Evolucion Tratamiento</span></dt>
+                <dd>
+                    <span>{{ seguimientoCondicion.evolucionTratamiento }}</span>
+                </dd>
+                <dt><span>Diagnosticos</span></dt>
+                <dd>
+                    <div *ngIf="seguimientoCondicion.diagnosticos">
+                        <a [routerLink]="['/diagnostico', seguimientoCondicion.diagnosticos?.id, 'view']">{{ seguimientoCondicion.diagnosticos?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/seguimiento-condicion', seguimientoCondicion.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

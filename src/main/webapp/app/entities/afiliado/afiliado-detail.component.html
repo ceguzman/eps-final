@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="afiliado">
+            <h2><span>Afiliado</span> {{ afiliado.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Parentesco</span></dt>
+                <dd>
+                    <span>{{ afiliado.parentesco }}</span>
+                </dd>
+                <dt><span>Correo Electronico</span></dt>
+                <dd>
+                    <span>{{ afiliado.correoElectronico }}</span>
+                </dd>
+                <dt><span>Nombre Afiliado</span></dt>
+                <dd>
+                    <span>{{ afiliado.nombreAfiliado }}</span>
+                </dd>
+                <dt><span>Cliente</span></dt>
+                <dd>
+                    <div *ngIf="afiliado.cliente">
+                        <a [routerLink]="['/cliente', afiliado.cliente?.id, 'view']">{{ afiliado.cliente?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/afiliado', afiliado.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-afiliado-heading">Create or edit a Afiliado</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_parentesco">Parentesco</label>
+                    <input type="text" class="form-control" name="parentesco" id="field_parentesco"
+                           formControlName="parentesco"/>
+                    <div *ngIf="editForm.get('parentesco')!.invalid && (editForm.get('parentesco')!.dirty || editForm.get('parentesco')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('parentesco')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('parentesco')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_correoElectronico">Correo Electronico</label>
+                    <input type="text" class="form-control" name="correoElectronico" id="field_correoElectronico"
+                           formControlName="correoElectronico"/>
+                    <div *ngIf="editForm.get('correoElectronico')!.invalid && (editForm.get('correoElectronico')!.dirty || editForm.get('correoElectronico')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('correoElectronico')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('correoElectronico')?.errors?.maxlength">
+                        This field cannot be longer than 180 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nombreAfiliado">Nombre Afiliado</label>
+                    <input type="text" class="form-control" name="nombreAfiliado" id="field_nombreAfiliado"
+                           formControlName="nombreAfiliado"/>
+                    <div *ngIf="editForm.get('nombreAfiliado')!.invalid && (editForm.get('nombreAfiliado')!.dirty || editForm.get('nombreAfiliado')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nombreAfiliado')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nombreAfiliado')?.errors?.maxlength">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cliente">Cliente</label>
+                    <select class="form-control" id="field_cliente" name="cliente" formControlName="cliente">
+                        <option *ngIf="!editForm.get('cliente')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="clienteOption.id === editForm.get('cliente')!.value?.id ? editForm.get('cliente')!.value : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackById">{{ clienteOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('cliente')!.invalid && (editForm.get('cliente')!.dirty || editForm.get('cliente')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('cliente')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

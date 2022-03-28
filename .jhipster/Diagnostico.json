@@ -1,0 +1,65 @@
+{
+  "name": "Diagnostico",
+  "fields": [
+    {
+      "fieldName": "resultadoLaboratorio",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "urlImagen",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "tipoCondicionSalud",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "240"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "seguimientoCondicion",
+      "otherEntityRelationshipName": "diagnosticos",
+      "relationshipName": "seguimientoCondiciones"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "indicadoresSalud",
+      "otherEntityRelationshipName": "diagnostico",
+      "relationshipName": "indicadoresSalud"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "cliente",
+      "otherEntityRelationshipName": "diagnosticos",
+      "relationshipValidateRules": "required",
+      "relationshipName": "cliente",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20220328002932",
+  "entityTableName": "diagnostico",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cliente">
+            <h2><span>Cliente</span> {{ cliente.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Numero Documento</span></dt>
+                <dd>
+                    <span>{{ cliente.numeroDocumento }}</span>
+                </dd>
+                <dt><span>Primer Nombre</span></dt>
+                <dd>
+                    <span>{{ cliente.primerNombre }}</span>
+                </dd>
+                <dt><span>Primer Apellido</span></dt>
+                <dd>
+                    <span>{{ cliente.primerApellido }}</span>
+                </dd>
+                <dt><span>Segundo Nombre</span></dt>
+                <dd>
+                    <span>{{ cliente.segundoNombre }}</span>
+                </dd>
+                <dt><span>Segundo Apellido</span></dt>
+                <dd>
+                    <span>{{ cliente.segundoApellido }}</span>
+                </dd>
+                <dt><span>Img Url</span></dt>
+                <dd>
+                    <div *ngIf="cliente.imgUrl">
+                        <a (click)="openFile(cliente.imgUrlContentType, cliente.imgUrl)">
+                            <img [src]="'data:' + cliente.imgUrlContentType + ';base64,' + cliente.imgUrl" style="max-width: 100%;" alt="cliente image"/>
+                        </a>
+                        {{ cliente.imgUrlContentType }}, {{ byteSize(cliente.imgUrl) }}
+                    </div>
+                </dd>
+                <dt><span>Typo Documento</span></dt>
+                <dd>
+                    <div *ngIf="cliente.typoDocumento">
+                        <a [routerLink]="['/tipo-documento', cliente.typoDocumento?.id, 'view']">{{ cliente.typoDocumento?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cliente', cliente.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

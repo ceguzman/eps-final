@@ -1,0 +1,104 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-seguimiento-condicion-heading">Create or edit a Seguimiento Condicion</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_estadoCondicion">Estado Condicion</label>
+                    <input type="text" class="form-control" name="estadoCondicion" id="field_estadoCondicion"
+                           formControlName="estadoCondicion"/>
+                    <div *ngIf="editForm.get('estadoCondicion')!.invalid && (editForm.get('estadoCondicion')!.dirty || editForm.get('estadoCondicion')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('estadoCondicion')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('estadoCondicion')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fecha">Fecha</label>
+                    <div class="input-group">
+                        <input id="field_fecha" type="text" class="form-control" name="fecha" ngbDatepicker #fechaDp="ngbDatepicker" formControlName="fecha"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fechaDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('fecha')!.invalid && (editForm.get('fecha')!.dirty || editForm.get('fecha')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('fecha')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_diagnostico">Diagnostico</label>
+                    <input type="text" class="form-control" name="diagnostico" id="field_diagnostico"
+                           formControlName="diagnostico"/>
+                    <div *ngIf="editForm.get('diagnostico')!.invalid && (editForm.get('diagnostico')!.dirty || editForm.get('diagnostico')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('diagnostico')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('diagnostico')?.errors?.maxlength">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_evolucionTratamiento">Evolucion Tratamiento</label>
+                    <input type="text" class="form-control" name="evolucionTratamiento" id="field_evolucionTratamiento"
+                           formControlName="evolucionTratamiento"/>
+                    <div *ngIf="editForm.get('evolucionTratamiento')!.invalid && (editForm.get('evolucionTratamiento')!.dirty || editForm.get('evolucionTratamiento')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('evolucionTratamiento')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('evolucionTratamiento')?.errors?.maxlength">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_diagnosticos">Diagnosticos</label>
+                    <select class="form-control" id="field_diagnosticos" name="diagnosticos" formControlName="diagnosticos">
+                        <option *ngIf="!editForm.get('diagnosticos')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="diagnosticoOption.id === editForm.get('diagnosticos')!.value?.id ? editForm.get('diagnosticos')!.value : diagnosticoOption" *ngFor="let diagnosticoOption of diagnosticos; trackBy: trackById">{{ diagnosticoOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('diagnosticos')!.invalid && (editForm.get('diagnosticos')!.dirty || editForm.get('diagnosticos')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('diagnosticos')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

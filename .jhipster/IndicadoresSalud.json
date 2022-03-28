@@ -1,0 +1,77 @@
+{
+  "name": "IndicadoresSalud",
+  "fields": [
+    {
+      "fieldName": "frecuenciaCardiaca",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "tencionArterial",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "saturacionOxigeno",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "vacunas",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "distanciaRecorrida",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "30"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "controlProfesional",
+      "otherEntityRelationshipName": "indicadorSalud",
+      "relationshipName": "controlesProfesionales"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "diagnostico",
+      "otherEntityRelationshipName": "indicadoresSalud",
+      "relationshipValidateRules": "required",
+      "relationshipName": "diagnostico",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20220328003132",
+  "entityTableName": "indicadores_salud",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

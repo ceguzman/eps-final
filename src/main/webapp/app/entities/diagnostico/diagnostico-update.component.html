@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-diagnostico-heading">Create or edit a Diagnostico</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_resultadoLaboratorio">Resultado Laboratorio</label>
+                    <input type="text" class="form-control" name="resultadoLaboratorio" id="field_resultadoLaboratorio"
+                           formControlName="resultadoLaboratorio"/>
+                    <div *ngIf="editForm.get('resultadoLaboratorio')!.invalid && (editForm.get('resultadoLaboratorio')!.dirty || editForm.get('resultadoLaboratorio')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('resultadoLaboratorio')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('resultadoLaboratorio')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_urlImagen">Url Imagen</label>
+                    <input type="text" class="form-control" name="urlImagen" id="field_urlImagen"
+                           formControlName="urlImagen"/>
+                    <div *ngIf="editForm.get('urlImagen')!.invalid && (editForm.get('urlImagen')!.dirty || editForm.get('urlImagen')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('urlImagen')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('urlImagen')?.errors?.maxlength">
+                        This field cannot be longer than 500 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipoCondicionSalud">Tipo Condicion Salud</label>
+                    <input type="text" class="form-control" name="tipoCondicionSalud" id="field_tipoCondicionSalud"
+                           formControlName="tipoCondicionSalud"/>
+                    <div *ngIf="editForm.get('tipoCondicionSalud')!.invalid && (editForm.get('tipoCondicionSalud')!.dirty || editForm.get('tipoCondicionSalud')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tipoCondicionSalud')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tipoCondicionSalud')?.errors?.maxlength">
+                        This field cannot be longer than 240 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cliente">Cliente</label>
+                    <select class="form-control" id="field_cliente" name="cliente" formControlName="cliente">
+                        <option *ngIf="!editForm.get('cliente')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="clienteOption.id === editForm.get('cliente')!.value?.id ? editForm.get('cliente')!.value : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackById">{{ clienteOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('cliente')!.invalid && (editForm.get('cliente')!.dirty || editForm.get('cliente')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('cliente')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

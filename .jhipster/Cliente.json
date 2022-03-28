@@ -1,0 +1,87 @@
+{
+  "name": "Cliente",
+  "fields": [
+    {
+      "fieldName": "numeroDocumento",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength",
+        "unique"
+      ],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "primerNombre",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "primerApellido",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "segundoNombre",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "segundoApellido",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "imgUrl",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "afiliado",
+      "otherEntityRelationshipName": "cliente",
+      "relationshipName": "afiliados"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "diagnostico",
+      "otherEntityRelationshipName": "cliente",
+      "relationshipName": "diagnosticos"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "tipoDocumento",
+      "otherEntityRelationshipName": "clientes",
+      "relationshipValidateRules": "required",
+      "relationshipName": "typoDocumento",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20220328002732",
+  "entityTableName": "cliente",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

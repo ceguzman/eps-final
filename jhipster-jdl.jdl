@@ -1,0 +1,79 @@
+enum State{
+	ACTIVE,
+    INACTIVE
+}
+
+entity TipoDocumento{
+	iniciales String required maxlength(20) unique,
+    nombreDocumento String  required maxlength(20) unique,
+    estadoTipoDocuemnto State required 
+}
+
+entity Cliente{
+	numeroDocumento String  required maxlength(255) unique,
+    primerNombre String required maxlength(50),
+    primerApellido String required maxlength(50),
+    segundoNombre String  maxlength(50),
+    segundoApellido String  maxlength(50),
+    imgUrl ImageBlob
+}
+
+entity Afiliado{
+	parentesco String required maxlength(100),
+    correoElectronico String required maxlength(180) unique,
+    nombreAfiliado String required maxlength(250),
+}
+
+entity Diagnostico {
+	resultadoLaboratorio String required maxlength(100),
+    urlImagen String required maxlength(500),
+    tipoCondicionSalud String required maxlength(240)
+}
+
+entity SeguimientoCondicion{
+	estadoCondicion String required maxlength(100),
+    fecha LocalDate required,
+    diagnostico String  required maxlength(255),
+    evolucionTratamiento String required maxlength(255)
+}
+
+entity IndicadoresSalud{
+	frecuenciaCardiaca String required maxlength(200),
+    tencionArterial String required maxlength(200),
+    saturacionOxigeno String required maxlength(255),
+    vacunas String required maxlength(100),
+    distanciaRecorrida String required maxlength(30),
+}
+
+entity ControlProfesional{
+	tipoMedico String required maxlength(200),
+    fecha LocalDate required,
+    nombreMedico String required maxlength(250),
+    observaciones String  required maxlength(200)
+}
+
+relationship OneToMany {
+	TipoDocumento{clientes} to Cliente{typoDocumento required}
+}
+
+relationship OneToMany {
+	Cliente{afiliados} to Afiliado{cliente required}
+}
+
+relationship OneToMany {
+	Cliente{diagnosticos} to Diagnostico{cliente required}
+}
+
+relationship OneToMany {
+	Diagnostico{seguimientoCondiciones} to SeguimientoCondicion{diagnosticos required}
+}
+
+relationship OneToMany {
+	Diagnostico{indicadoresSalud} to IndicadoresSalud{diagnostico required}
+}
+
+relationship OneToMany {
+	IndicadoresSalud{controlesProfesionales} to ControlProfesional{indicadorSalud required}
+}
+
+

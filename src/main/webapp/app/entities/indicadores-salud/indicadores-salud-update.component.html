@@ -1,0 +1,120 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-indicadores-salud-heading">Create or edit a Indicadores Salud</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_frecuenciaCardiaca">Frecuencia Cardiaca</label>
+                    <input type="text" class="form-control" name="frecuenciaCardiaca" id="field_frecuenciaCardiaca"
+                           formControlName="frecuenciaCardiaca"/>
+                    <div *ngIf="editForm.get('frecuenciaCardiaca')!.invalid && (editForm.get('frecuenciaCardiaca')!.dirty || editForm.get('frecuenciaCardiaca')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('frecuenciaCardiaca')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('frecuenciaCardiaca')?.errors?.maxlength">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tencionArterial">Tencion Arterial</label>
+                    <input type="text" class="form-control" name="tencionArterial" id="field_tencionArterial"
+                           formControlName="tencionArterial"/>
+                    <div *ngIf="editForm.get('tencionArterial')!.invalid && (editForm.get('tencionArterial')!.dirty || editForm.get('tencionArterial')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tencionArterial')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tencionArterial')?.errors?.maxlength">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_saturacionOxigeno">Saturacion Oxigeno</label>
+                    <input type="text" class="form-control" name="saturacionOxigeno" id="field_saturacionOxigeno"
+                           formControlName="saturacionOxigeno"/>
+                    <div *ngIf="editForm.get('saturacionOxigeno')!.invalid && (editForm.get('saturacionOxigeno')!.dirty || editForm.get('saturacionOxigeno')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('saturacionOxigeno')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('saturacionOxigeno')?.errors?.maxlength">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vacunas">Vacunas</label>
+                    <input type="text" class="form-control" name="vacunas" id="field_vacunas"
+                           formControlName="vacunas"/>
+                    <div *ngIf="editForm.get('vacunas')!.invalid && (editForm.get('vacunas')!.dirty || editForm.get('vacunas')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('vacunas')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('vacunas')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_distanciaRecorrida">Distancia Recorrida</label>
+                    <input type="text" class="form-control" name="distanciaRecorrida" id="field_distanciaRecorrida"
+                           formControlName="distanciaRecorrida"/>
+                    <div *ngIf="editForm.get('distanciaRecorrida')!.invalid && (editForm.get('distanciaRecorrida')!.dirty || editForm.get('distanciaRecorrida')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('distanciaRecorrida')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('distanciaRecorrida')?.errors?.maxlength">
+                        This field cannot be longer than 30 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_diagnostico">Diagnostico</label>
+                    <select class="form-control" id="field_diagnostico" name="diagnostico" formControlName="diagnostico">
+                        <option *ngIf="!editForm.get('diagnostico')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="diagnosticoOption.id === editForm.get('diagnostico')!.value?.id ? editForm.get('diagnostico')!.value : diagnosticoOption" *ngFor="let diagnosticoOption of diagnosticos; trackBy: trackById">{{ diagnosticoOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('diagnostico')!.invalid && (editForm.get('diagnostico')!.dirty || editForm.get('diagnostico')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('diagnostico')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

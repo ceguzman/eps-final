@@ -1,0 +1,60 @@
+{
+  "name": "SeguimientoCondicion",
+  "fields": [
+    {
+      "fieldName": "estadoCondicion",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "fecha",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "diagnostico",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "evolucionTratamiento",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "255"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "diagnostico",
+      "otherEntityRelationshipName": "seguimientoCondiciones",
+      "relationshipValidateRules": "required",
+      "relationshipName": "diagnosticos",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20220328003032",
+  "entityTableName": "seguimiento_condicion",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

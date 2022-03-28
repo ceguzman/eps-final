@@ -1,0 +1,130 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-cliente-heading">Create or edit a Cliente</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_numeroDocumento">Numero Documento</label>
+                    <input type="text" class="form-control" name="numeroDocumento" id="field_numeroDocumento"
+                           formControlName="numeroDocumento"/>
+                    <div *ngIf="editForm.get('numeroDocumento')!.invalid && (editForm.get('numeroDocumento')!.dirty || editForm.get('numeroDocumento')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('numeroDocumento')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('numeroDocumento')?.errors?.maxlength">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_primerNombre">Primer Nombre</label>
+                    <input type="text" class="form-control" name="primerNombre" id="field_primerNombre"
+                           formControlName="primerNombre"/>
+                    <div *ngIf="editForm.get('primerNombre')!.invalid && (editForm.get('primerNombre')!.dirty || editForm.get('primerNombre')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('primerNombre')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('primerNombre')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_primerApellido">Primer Apellido</label>
+                    <input type="text" class="form-control" name="primerApellido" id="field_primerApellido"
+                           formControlName="primerApellido"/>
+                    <div *ngIf="editForm.get('primerApellido')!.invalid && (editForm.get('primerApellido')!.dirty || editForm.get('primerApellido')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('primerApellido')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('primerApellido')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_segundoNombre">Segundo Nombre</label>
+                    <input type="text" class="form-control" name="segundoNombre" id="field_segundoNombre"
+                           formControlName="segundoNombre"/>
+                    <div *ngIf="editForm.get('segundoNombre')!.invalid && (editForm.get('segundoNombre')!.dirty || editForm.get('segundoNombre')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('segundoNombre')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_segundoApellido">Segundo Apellido</label>
+                    <input type="text" class="form-control" name="segundoApellido" id="field_segundoApellido"
+                           formControlName="segundoApellido"/>
+                    <div *ngIf="editForm.get('segundoApellido')!.invalid && (editForm.get('segundoApellido')!.dirty || editForm.get('segundoApellido')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('segundoApellido')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_imgUrl">Img Url</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('imgUrlContentType')!.value + ';base64,' + editForm.get('imgUrl')!.value" style="max-height: 100px;" *ngIf="editForm.get('imgUrl')!.value" alt="cliente image"/>
+                        <div *ngIf="editForm.get('imgUrl')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('imgUrlContentType')!.value }}, {{ byteSize(editForm.get('imgUrl')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('imgUrl', 'imgUrlContentType', 'file_imgUrl')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_imgUrl" (change)="setFileData($event, 'imgUrl', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="imgUrl" id="field_imgUrl"
+                           formControlName="imgUrl"/>
+                    <input type="hidden" class="form-control" name="imgUrlContentType" id="field_imgUrlContentType"
+                           formControlName="imgUrlContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_typoDocumento">Typo Documento</label>
+                    <select class="form-control" id="field_typoDocumento" name="typoDocumento" formControlName="typoDocumento">
+                        <option *ngIf="!editForm.get('typoDocumento')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="tipoDocumentoOption.id === editForm.get('typoDocumento')!.value?.id ? editForm.get('typoDocumento')!.value : tipoDocumentoOption" *ngFor="let tipoDocumentoOption of tipodocumentos; trackBy: trackById">{{ tipoDocumentoOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('typoDocumento')!.invalid && (editForm.get('typoDocumento')!.dirty || editForm.get('typoDocumento')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('typoDocumento')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

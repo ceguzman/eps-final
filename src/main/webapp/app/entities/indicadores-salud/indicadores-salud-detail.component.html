@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="indicadoresSalud">
+            <h2><span>Indicadores Salud</span> {{ indicadoresSalud.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Frecuencia Cardiaca</span></dt>
+                <dd>
+                    <span>{{ indicadoresSalud.frecuenciaCardiaca }}</span>
+                </dd>
+                <dt><span>Tencion Arterial</span></dt>
+                <dd>
+                    <span>{{ indicadoresSalud.tencionArterial }}</span>
+                </dd>
+                <dt><span>Saturacion Oxigeno</span></dt>
+                <dd>
+                    <span>{{ indicadoresSalud.saturacionOxigeno }}</span>
+                </dd>
+                <dt><span>Vacunas</span></dt>
+                <dd>
+                    <span>{{ indicadoresSalud.vacunas }}</span>
+                </dd>
+                <dt><span>Distancia Recorrida</span></dt>
+                <dd>
+                    <span>{{ indicadoresSalud.distanciaRecorrida }}</span>
+                </dd>
+                <dt><span>Diagnostico</span></dt>
+                <dd>
+                    <div *ngIf="indicadoresSalud.diagnostico">
+                        <a [routerLink]="['/diagnostico', indicadoresSalud.diagnostico?.id, 'view']">{{ indicadoresSalud.diagnostico?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/indicadores-salud', indicadoresSalud.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

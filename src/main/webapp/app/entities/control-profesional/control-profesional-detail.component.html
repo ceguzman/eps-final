@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="controlProfesional">
+            <h2><span>Control Profesional</span> {{ controlProfesional.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Tipo Medico</span></dt>
+                <dd>
+                    <span>{{ controlProfesional.tipoMedico }}</span>
+                </dd>
+                <dt><span>Fecha</span></dt>
+                <dd>
+                    <span>{{ controlProfesional.fecha }}</span>
+                </dd>
+                <dt><span>Nombre Medico</span></dt>
+                <dd>
+                    <span>{{ controlProfesional.nombreMedico }}</span>
+                </dd>
+                <dt><span>Observaciones</span></dt>
+                <dd>
+                    <span>{{ controlProfesional.observaciones }}</span>
+                </dd>
+                <dt><span>Indicador Salud</span></dt>
+                <dd>
+                    <div *ngIf="controlProfesional.indicadorSalud">
+                        <a [routerLink]="['/indicadores-salud', controlProfesional.indicadorSalud?.id, 'view']">{{ controlProfesional.indicadorSalud?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/control-profesional', controlProfesional.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
